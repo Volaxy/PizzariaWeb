@@ -1,0 +1,31 @@
+/* Formatações de Classes */
+/* Formatações Gerais de Elementos */
+body {
+    background-image: linear-gradient(darkorange, goldenrod);
+    background-size: auto 100vh;
+}
+
+/* Formatações Top to Bottom */
+.tablePizzas {
+    background-color: #ddd;
+    width: 800px;
+
+    margin: 30vh auto;
+    border-collapse: collapse;
+
+    text-align: center;
+}
+
+    .tablePizzas caption {
+        font-size: 1.5em;
+
+        text-decoration: underline;
+    }
+
+    .tablePizzas thead {
+        font-size: 1.5em;
+    }
+
+        .tablePizzas td {
+            border-top: 1px solid #999;
+        }

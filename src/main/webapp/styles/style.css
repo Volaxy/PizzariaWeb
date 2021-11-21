@@ -1,0 +1,19 @@
+/* Imports e Variáveis */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;800&display=swap');
+/* font-family: 'Poppins', sans-serif; */
+
+/* Formatações de Classes */
+.button__link {
+    padding: 10px;
+    border-radius: 5px;
+
+    color: black;
+    text-decoration: none;
+}
+
+/* Formatações Gerais de Elementos */
+body {
+    margin: 0;
+
+    font-family: 'Poppins', sans-serif;
+}

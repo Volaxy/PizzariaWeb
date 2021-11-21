@@ -1,0 +1,26 @@
+/* Formatações de Classes */
+/* Formatações Gerais de Elementos */
+body {
+    background-image: linear-gradient(darkorange, goldenrod);
+
+    height: 80vh;
+}
+
+/* Formatações Top to Bottom */
+.main {
+    margin: 20vh auto;
+
+    text-align: center;
+}
+
+    .main__img {
+        width: 250px;
+    }
+
+    .main__tittle {
+        font-size: 3em;
+    }
+
+    .main__button {
+        background-color: gold;
+    }
