@@ -1,13 +1,7 @@
 /* Formatações de Classes */
 /* Formatações Gerais de Elementos */
-body {
-    background-image: linear-gradient(darkorange, goldenrod);
-    background-size: auto 100vh;
-}
-
 /* Formatações Top to Bottom */
-.tablePizzas {
-    background-color: #ddd;
+.tablePedidosEntrega {
     width: 800px;
 
     margin: 30vh auto;
@@ -16,16 +10,36 @@ body {
     text-align: center;
 }
 
-    .tablePizzas caption {
+    .tablePedidosEntrega caption {
         font-size: 1.5em;
 
         text-decoration: underline;
     }
 
-    .tablePizzas thead {
+    .tablePedidosEntrega thead {
         font-size: 1.5em;
     }
 
-        .tablePizzas td {
+        .tablePedidosEntrega td {
             border-top: 1px solid #999;
         }
+
+.tablePizzas {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+
+    width: 300px;
+
+    text-align: center;
+}
+
+.tablePedidosPresencial {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+
+    width: 300px;
+
+    text-align: center;
+}

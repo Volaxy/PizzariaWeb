@@ -3,7 +3,7 @@
 body {
     background-image: linear-gradient(darkorange, goldenrod);
 
-    height: 80vh;
+    background-size: 100vh auto;
 }
 
 /* Formatações Top to Bottom */
