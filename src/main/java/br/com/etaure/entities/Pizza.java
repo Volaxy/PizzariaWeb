@@ -3,6 +3,8 @@ package br.com.etaure.entities;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,8 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
+	
+	@Enumerated(value = EnumType.STRING)
 	private TamanhoDaPizza tamanho;
 	private Double preco;
 	

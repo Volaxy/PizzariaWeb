@@ -1,8 +1,6 @@
 package br.com.etaure.application;
 
 import br.com.etaure.daos.PizzaDAO;
-import br.com.etaure.entities.Pizza;
-import br.com.etaure.entities.enums.TamanhoDaPizza;
 
 public class Program {
 
@@ -14,8 +12,18 @@ public class Program {
 //		Pizza pizza = new Pizza(null, "Americana", TamanhoDaPizza.GRANDE, 20.00);
 //		pizzaDAO.insert(pizza);
 		
-		Pizza pizza = pizzaDAO.findById(3);
-		System.out.println(pizza);
+//		List<Pizza> pizzas = pizzaDAO.findAll();
+//		for (Pizza pizza : pizzas) {
+//			System.out.println(pizza);
+//		}
+		
+//		Pizza pizza = pizzaDAO.findById(2);
+//		System.out.println(pizza);
+		
+//		Pizza pizza = new Pizza(null, "Mista", TamanhoDaPizza.MEDIA, 90.00);
+//		pizzaDAO.updatePizza(1, pizza);
+		
+		pizzaDAO.deletePizza(1);
 		
 	}
 

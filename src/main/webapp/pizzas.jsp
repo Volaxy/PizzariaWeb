@@ -15,7 +15,7 @@
 </head>
 <body>
 	<table class="tablePedidosEntrega">
-		<caption><h1>Pizzas para Entrega</h1></caption>
+		<caption>Pizzas para Entrega</caption>
 
 		<thead>
 			<tr>
@@ -46,7 +46,7 @@
 	</table>
 
 	<table class="tablePizzas">
-		<caption><h2>Pizzas</h2></caption>
+		<caption>Pizzas</caption>
 
 		<thead>
 			<tr>
@@ -68,7 +68,7 @@
 	</table>
 
 	<table class="tablePedidosPresencial">
-		<caption><h1>Pizzas para Entrega</h1></caption>
+		<caption>Pizzas para Entrega</caption>
 
 		<thead>
 			<tr>
