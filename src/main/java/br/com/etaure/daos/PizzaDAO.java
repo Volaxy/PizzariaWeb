@@ -26,8 +26,6 @@ public class PizzaDAO {
 		em.getTransaction().begin();
 		em.persist(pizza);
 		em.getTransaction().commit();
-
-		em.close();
 	}
 
 	public List<Pizza> findAll() {
@@ -56,7 +54,6 @@ public class PizzaDAO {
 		oldPizza.setPreco(newPizza.getPreco());
 
 		em.getTransaction().commit();
-		em.close();
 	}
 
 	// Deleta a Pizza
@@ -70,8 +67,6 @@ public class PizzaDAO {
 		em.remove(pizza);
 		
 		em.getTransaction().commit();
-		
-		em.close();
 	}
 
 }

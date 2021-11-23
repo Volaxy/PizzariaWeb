@@ -1,19 +1,28 @@
 package br.com.etaure.controllers;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.etaure.daos.PizzaDAO;
+import br.com.etaure.entities.Pizza;
+import br.com.etaure.entities.enums.TamanhoDaPizza;
+
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(urlPatterns = {"/MainController", "/main", "insertPizza"})
+@WebServlet(urlPatterns = {"/MainController", "/main", "/addPizza"})
 public class MainController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private PizzaDAO pizzaDAO = new PizzaDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,13 +37,12 @@ public class MainController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getServletPath();
-		System.out.println(action);
 		
 		switch (action) {
 			case "/main":
 				listPedidos(request, response);
 				break;
-			case "/insertPizza":
+			case "/addPizza":
 				addPizza(request, response);
 				break;
 			default:
@@ -43,13 +51,22 @@ public class MainController extends HttpServlet {
 	}
 
 	private void listPedidos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("pizzas.jsp");
+		List<Pizza> pizzas = pizzaDAO.findAll();
+		
+		// Define uma variável contendo a lista de pizzas e direciona essa variável ao documento "pizzas.jsp"
+		request.setAttribute("pizzas", pizzas);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("pizzas.jsp");
+		rd.forward(request, response);
 	}
 	
 	private void addPizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("descricao"));
-		System.out.println(request.getParameter("tamanho"));
-		System.out.println(request.getParameter("preco"));
+		Pizza pizza = new Pizza(null,
+				request.getParameter("descricao"),
+				TamanhoDaPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
+				Double.valueOf(request.getParameter("preco")));
+		System.out.println(pizza);
+		pizzaDAO.insert(pizza);
 	}
 
 }

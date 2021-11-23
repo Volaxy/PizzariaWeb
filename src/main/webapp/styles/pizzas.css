@@ -2,7 +2,7 @@
 /* Formatações Gerais de Elementos */
 /* Formatações Top to Bottom */
 .tablePedidos {
-    width: 800px;
+    width: 600px;
 
     margin: 30vh auto;
     border-collapse: collapse;
@@ -11,13 +11,14 @@
 }
 
     .tablePedidos caption {
-        font-size: 1.5em;
+        font-size: 2em;
+        font-weight: bolder;
 
         text-decoration: underline;
     }
 
     .tablePedidos thead {
-        font-size: 1.5em;
+        font-size: 1.25em;
     }
 
 .div__pizzas {
@@ -27,7 +28,7 @@
 }
 
     .tablePizzas {
-        width: 300px;
+        width: 400px;
 
         text-align: center;
     }
@@ -41,7 +42,14 @@
             font-weight: normal;
         }
 
-        .div__pizzas__a {
+            .div__pizzas__update {
+                background-color: #41c6ee;
+                margin-left: 15px;
+
+                font-size: 0.80em;
+            } 
+
+        .div__pizzas__add {
             background-color: #12d400;
             display: inline-block;
 
