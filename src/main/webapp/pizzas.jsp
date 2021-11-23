@@ -1,11 +1,11 @@
-<!--<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" %>
 <%@ page import="br.com.etaure.entities.Pizza" %>
 <%@ page import="java.util.ArrayList" %>
 <%
 	List<Pizza> pizzas = (ArrayList<Pizza>) request.getAttribute("pizzas");
-%>-->
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,21 +56,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!--<% for(Pizza pizza : pizzas) { %>
+				<% for(Pizza pizza : pizzas) { %>
 					<tr>
 						<td><%= pizza.getId() %></td>
 						<td><%= pizza.getDescricao() %></td>
 						<td><%= pizza.getTamanho() %></td>
 						<td><%= pizza.getPreco() %></td>
+						<td> <a class="div__pizzas__update button__link" href="updatePizza?id=<%= pizza.getId() %>">Atualizar</a> </td>
 					</tr>
-				<% } %>-->
-				<tr>
-					<td>645</td>
-					<td>645</td>
-					<td>645</td>
-					<td>645</td>
-					<td> <a class="div__pizzas__update button__link" href="updatePizza">Atualizar</a> </td>
-				</tr>
+				<% } %>
 			</tbody>
 		</table>
 

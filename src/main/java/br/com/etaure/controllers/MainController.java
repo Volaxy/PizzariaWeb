@@ -17,7 +17,7 @@ import br.com.etaure.entities.enums.TamanhoDaPizza;
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(urlPatterns = {"/MainController", "/main", "/addPizza"})
+@WebServlet(urlPatterns = {"/MainController", "/main", "/addPizza", "/updatePizza"})
 public class MainController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -38,12 +38,16 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getServletPath();
 		
+		System.out.println(action);
 		switch (action) {
 			case "/main":
 				listPedidos(request, response);
 				break;
 			case "/addPizza":
 				addPizza(request, response);
+				break;
+			case "/updatePizza":
+				updatePizza(request, response);
 				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + action);
@@ -67,6 +71,19 @@ public class MainController extends HttpServlet {
 				Double.valueOf(request.getParameter("preco")));
 		System.out.println(pizza);
 		pizzaDAO.insert(pizza);
+	}
+	
+	private void updatePizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer idSelectedPizza = Integer.valueOf(request.getParameter("id"));
+		
+		Pizza pizza = pizzaDAO.findById(idSelectedPizza);
+		request.setAttribute("id", pizza.getId());
+		request.setAttribute("name", pizza.getDescricao());
+		request.setAttribute("size", pizza.getTamanho().getCode());
+		request.setAttribute("price", pizza.getPreco());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("updatePizza.jsp");
+		rd.forward(request, response);
 	}
 
 }

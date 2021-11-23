@@ -1,21 +1,21 @@
 function validar() {
-    var descricao = cadastroPizza.descricao.value;
-    var preco = cadastroPizza.preco.value;
+    var descricao = pizzaForm.descricao.value;
+    var preco = pizzaForm.preco.value;
 
     if(descricao === "") {
         alert("Preencha o campo nome");
-        cadastroPizza.descricao.focus();
+        pizzaForm.descricao.focus();
 
         return false
     } else {
 
         if(preco === "") {
             alert("Preencha o campo preço");
-            cadastroPizza.preco.focus();
+            pizzaForm.preco.focus();
 
             return false
         } else {
-            document.forms["cadastroPizza"].submit();
+            document.forms["pizzaForm"].submit();
         }
 
     }

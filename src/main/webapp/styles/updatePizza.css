@@ -1,0 +1,46 @@
+/* Formatações de Classes */
+/* Formatações Gerais de Elementos */
+/* Formatações Top to Bottom */
+form {
+    background-color: #fff;
+    width: 200px;
+    
+    margin: auto;
+    margin-top: 200px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.822);
+    padding: 25px;
+}
+
+    form input#id {
+        background-color: #bb8585;
+    }
+
+        form input#id:focus {
+            border: 2px solid red;
+        }
+
+    form input, form select {
+        background-color: #ddd;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+
+        margin-bottom: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.116);
+        border-radius: 2px;
+        padding: 10px;
+    }
+
+        form input:focus:not(#id), form select:focus {
+            outline: 2px solid mediumblue;
+            outline-offset: -2px;
+        }
+
+    .updatePizza {
+        background-color: #43c5ec;
+
+        margin-top: 40px;
+
+        cursor: pointer;
+    }

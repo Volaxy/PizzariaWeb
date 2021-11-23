@@ -39,6 +39,8 @@
         }
 
         .tablePizzas tbody th {
+        	margin-top: 10px;
+        	
             font-weight: normal;
         }
 
