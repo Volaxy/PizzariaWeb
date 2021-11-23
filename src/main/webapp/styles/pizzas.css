@@ -1,7 +1,7 @@
 /* Formatações de Classes */
 /* Formatações Gerais de Elementos */
 /* Formatações Top to Bottom */
-.tablePedidosEntrega {
+.tablePedidos {
     width: 800px;
 
     margin: 30vh auto;
@@ -10,36 +10,44 @@
     text-align: center;
 }
 
-    .tablePedidosEntrega caption {
+    .tablePedidos caption {
         font-size: 1.5em;
 
         text-decoration: underline;
     }
 
-    .tablePedidosEntrega thead {
+    .tablePedidos thead {
         font-size: 1.5em;
     }
 
-        .tablePedidosEntrega td {
-            border-top: 1px solid #999;
+.div__pizzas {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+    .tablePizzas {
+        width: 300px;
+
+        text-align: center;
+    }
+
+        .tablePizzas caption {
+            font-size: 1.75em;
+            font-weight: bolder;
         }
 
-.tablePizzas {
-    position: absolute;
-    top: 50px;
-    left: 50px;
+        .tablePizzas tbody th {
+            font-weight: normal;
+        }
 
-    width: 300px;
+        .div__pizzas__a {
+            background-color: #12d400;
+            display: inline-block;
 
-    text-align: center;
-}
+            margin-top: 20px;
+            margin-left: 50%;
+            padding: 10px;
 
-.tablePedidosPresencial {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-
-    width: 300px;
-
-    text-align: center;
-}
+            transform: translateX(-50%);
+        }

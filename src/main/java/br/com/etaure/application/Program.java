@@ -1,10 +1,8 @@
 package br.com.etaure.application;
 
-import br.com.etaure.daos.PizzaDAO;
-
 public class Program {
 
-	private static PizzaDAO pizzaDAO = new PizzaDAO();
+//	private static PizzaDAO pizzaDAO = new PizzaDAO();
 	
 	public static void main(String[] args) {
 		
@@ -23,7 +21,7 @@ public class Program {
 //		Pizza pizza = new Pizza(null, "Mista", TamanhoDaPizza.MEDIA, 90.00);
 //		pizzaDAO.updatePizza(1, pizza);
 		
-		pizzaDAO.deletePizza(1);
+//		pizzaDAO.deletePizza(1);
 		
 	}
 

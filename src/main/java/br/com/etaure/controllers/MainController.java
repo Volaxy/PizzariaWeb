@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(urlPatterns = {"/MainController", "/main"})
+@WebServlet(urlPatterns = {"/MainController", "/main", "insertPizza"})
 public class MainController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -34,13 +34,22 @@ public class MainController extends HttpServlet {
 			case "/main":
 				listPedidos(request, response);
 				break;
+			case "/insertPizza":
+				addPizza(request, response);
+				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + action);
 		}
 	}
-	
+
 	private void listPedidos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect("pizzas.jsp");
+	}
+	
+	private void addPizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("descricao"));
+		System.out.println(request.getParameter("tamanho"));
+		System.out.println(request.getParameter("preco"));
 	}
 
 }

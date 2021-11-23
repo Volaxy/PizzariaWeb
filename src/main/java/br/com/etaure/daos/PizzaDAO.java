@@ -69,7 +69,6 @@ public class PizzaDAO {
 		
 		em.remove(pizza);
 		
-		em.flush();
 		em.getTransaction().commit();
 		
 		em.close();
