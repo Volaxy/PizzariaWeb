@@ -17,7 +17,7 @@ import br.com.etaure.entities.enums.TamanhoDaPizza;
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(urlPatterns = {"/MainController", "/main", "/addPizza", "/updatePizza"})
+@WebServlet(urlPatterns = {"/MainController", "/main", "/addPizza", "/updatePizza", "/updateOldPizza"})
 public class MainController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -49,6 +49,9 @@ public class MainController extends HttpServlet {
 			case "/updatePizza":
 				updatePizza(request, response);
 				break;
+			case "/updateOldPizza":
+				updateOldPizza(request, response);
+				break;
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + action);
 		}
@@ -71,6 +74,8 @@ public class MainController extends HttpServlet {
 				Double.valueOf(request.getParameter("preco")));
 		System.out.println(pizza);
 		pizzaDAO.insert(pizza);
+		
+		response.sendRedirect("main");
 	}
 	
 	private void updatePizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -84,6 +89,17 @@ public class MainController extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("updatePizza.jsp");
 		rd.forward(request, response);
+	}
+	
+	private void updateOldPizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Pizza pizza = new Pizza(Integer.valueOf(request.getParameter("id")),
+				request.getParameter("descricao"),
+				TamanhoDaPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
+				Double.valueOf(request.getParameter("preco")));
+		
+		pizzaDAO.updatePizza(pizza.getId(), pizza);
+		
+		response.sendRedirect("main");
 	}
 
 }

@@ -13,9 +13,9 @@
     <title>Editar Pizza</title>
 </head>
 <body>
-    <form action="" name="pizzaForm">
+    <form action="updateOldPizza" name="pizzaForm">
     	<label for="id">Identificação</label>
-    	<input id="id" type="text" value="<% out.print(request.getAttribute("id")); %>" readonly>
+    	<input id="id" type="text" name="id" value="<% out.print(request.getAttribute("id")); %>" readonly>
     
         <label for="name">Nome da Pizza</label>
         <input id="name" type="text" name="descricao" placeholder="Nome da Pizza" value="<% out.print(request.getAttribute("name")); %>">
