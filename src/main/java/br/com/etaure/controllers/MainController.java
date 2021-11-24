@@ -17,87 +17,105 @@ import br.com.etaure.entities.enums.TamanhoDaPizza;
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(urlPatterns = {"/MainController", "/main", "/addPizza", "/updatePizza", "/updateOldPizza"})
+@WebServlet(urlPatterns = { "/MainController", "/main", "/addPizza", "/updatePizza", "/updateOldPizza",
+		"/deletePizza" })
 public class MainController extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private PizzaDAO pizzaDAO = new PizzaDAO();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MainController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public MainController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String action = request.getServletPath();
-		
+
 		System.out.println(action);
 		switch (action) {
-			case "/main":
-				listPedidos(request, response);
-				break;
-			case "/addPizza":
-				addPizza(request, response);
-				break;
-			case "/updatePizza":
-				updatePizza(request, response);
-				break;
-			case "/updateOldPizza":
-				updateOldPizza(request, response);
-				break;
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + action);
+		case "/main":
+			listPedidos(request, response);
+			break;
+		case "/addPizza":
+			addPizza(request, response);
+			break;
+		case "/updatePizza":
+			updatePizza(request, response);
+			break;
+		case "/updateOldPizza":
+			updateOldPizza(request, response);
+			break;
+		case "/deletePizza":
+			deletePizza(request, response);
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + action);
 		}
 	}
 
-	private void listPedidos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void listPedidos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<Pizza> pizzas = pizzaDAO.findAll();
-		
-		// Define uma variável contendo a lista de pizzas e direciona essa variável ao documento "pizzas.jsp"
+
+		// Define uma variável contendo a lista de pizzas e direciona essa variável ao
+		// documento "pizzas.jsp"
 		request.setAttribute("pizzas", pizzas);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("pizzas.jsp");
 		rd.forward(request, response);
 	}
-	
-	private void addPizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Pizza pizza = new Pizza(null,
-				request.getParameter("descricao"),
+
+	private void addPizza(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Pizza pizza = new Pizza(null, request.getParameter("descricao"),
 				TamanhoDaPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
 				Double.valueOf(request.getParameter("preco")));
 		System.out.println(pizza);
 		pizzaDAO.insert(pizza);
-		
+
 		response.sendRedirect("main");
 	}
-	
-	private void updatePizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private void updatePizza(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Integer idSelectedPizza = Integer.valueOf(request.getParameter("id"));
-		
+
 		Pizza pizza = pizzaDAO.findById(idSelectedPizza);
 		request.setAttribute("id", pizza.getId());
 		request.setAttribute("name", pizza.getDescricao());
 		request.setAttribute("size", pizza.getTamanho().getCode());
 		request.setAttribute("price", pizza.getPreco());
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("updatePizza.jsp");
 		rd.forward(request, response);
 	}
-	
-	private void updateOldPizza(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Pizza pizza = new Pizza(Integer.valueOf(request.getParameter("id")),
-				request.getParameter("descricao"),
+
+	private void updateOldPizza(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Pizza pizza = new Pizza(Integer.valueOf(request.getParameter("id")), request.getParameter("descricao"),
 				TamanhoDaPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
 				Double.valueOf(request.getParameter("preco")));
-		
+
 		pizzaDAO.updatePizza(pizza.getId(), pizza);
+
+		response.sendRedirect("main");
+	}
+
+	private void deletePizza(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Integer id = Integer.valueOf(request.getParameter("id"));
+		
+		pizzaDAO.deletePizza(id);
 		
 		response.sendRedirect("main");
 	}

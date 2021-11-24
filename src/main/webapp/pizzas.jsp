@@ -25,7 +25,7 @@
 
 		<thead>
 			<tr>
-				<th>Nº do Pedido</th>
+				<th>Nº</th>
 				<th>Entrega</th>
 				<th>Pagamento</th>
 				<th>R$</th>
@@ -63,6 +63,7 @@
 						<td><%= pizza.getTamanho() %></td>
 						<td><%= pizza.getPreco() %></td>
 						<td> <a class="div__pizzas__update button__link" href="updatePizza?id=<%= pizza.getId() %>">Atualizar</a> </td>
+						<td> <a class="div__pizzas__delete button__link" href="javascript: confirmarExclusao(<%= pizza.getId() %>)">Excluir</a> </td>
 					</tr>
 				<% } %>
 			</tbody>
@@ -70,5 +71,7 @@
 
 		<a class="div__pizzas__add button__link" href="newPizza.html">Adicionar Pizza</a>
 	</div>
+
+	<script src="scripts/confirmador.js"></script>
 </body>
 </html>
