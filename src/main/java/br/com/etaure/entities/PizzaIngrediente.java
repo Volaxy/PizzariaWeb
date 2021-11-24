@@ -6,6 +6,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import br.com.etaure.entities.pks.PizzaIngredientePK;
+
 @Entity
 @Table(name = "pizza_ingrediente")
 public class PizzaIngrediente {

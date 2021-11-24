@@ -2,18 +2,20 @@ package br.com.etaure.application;
 
 import java.util.List;
 
-import br.com.etaure.daos.IngredienteDAO;
-import br.com.etaure.daos.PizzaDAO;
-import br.com.etaure.daos.PizzaIngredienteDAO;
-import br.com.etaure.entities.PizzaIngrediente;
+import br.com.etaure.daos.ClienteDAO;
+import br.com.etaure.daos.PedidoDAO;
+import br.com.etaure.entities.Pedido;
+import br.com.etaure.entities.enums.TipoPagamento;
+import br.com.etaure.entities.enums.TipoPedido;
 
 public class Program {
 
-	private static PizzaDAO pizzaDAO = new PizzaDAO();
+//	private static PizzaDAO pizzaDAO = new PizzaDAO();
 //	private static EnderecoDAO enderecoDAO = new EnderecoDAO();
-//	private static ClienteDAO clienteDAO = new ClienteDAO();
-	private static IngredienteDAO ingredienteDAO = new IngredienteDAO();
-	private static PizzaIngredienteDAO pizzaIngredienteDAO = new PizzaIngredienteDAO();
+	private static ClienteDAO clienteDAO = new ClienteDAO();
+//	private static IngredienteDAO ingredienteDAO = new IngredienteDAO();
+//	private static PizzaIngredienteDAO pizzaIngredienteDAO = new PizzaIngredienteDAO();
+	private static PedidoDAO pedidoDAO = new PedidoDAO();
 	
 	public static void main(String[] args) {
 		
@@ -84,6 +86,9 @@ public class Program {
 
 //		ingredienteDAO.deleteIngrediente(5);
 		
+		
+		// ************************** //
+		// Métodos para PizzaIngrediente CRUD
 //		PizzaIngrediente pi = new PizzaIngrediente(pizzaDAO.findById(6), ingredienteDAO.findById(4), 3);
 //		pizzaIngredienteDAO.insert(pi);
 		
@@ -95,7 +100,21 @@ public class Program {
 //		PizzaIngrediente pizzaIngrediente = pizzaIngredienteDAO.findById(pizzaDAO.findById(2), ingredienteDAO.findById(6));
 //		System.out.println(pizzaIngrediente);
 		
-		pizzaIngredienteDAO.deletePizzaIngrediente(pizzaDAO.findById(2), ingredienteDAO.findById(6));
+//		pizzaIngredienteDAO.deletePizzaIngrediente(pizzaDAO.findById(2), ingredienteDAO.findById(6));
+		
+		// ************************** //
+		// Métodos para Pedido CRUD
+//		Pedido pedido = new Pedido(null, TipoPedido.ENTREGA, TipoPagamento.CARTAO, 90.00, clienteDAO.findById(1));
+//		pedidoDAO.insert(pedido);
+		
+//		List<Pedido> pedidos = pedidoDAO.findAll();
+//		pedidos.forEach(System.out::println);
+		
+//		System.out.println(pedidoDAO.findById(14));
+		
+//		pedidoDAO.updatePedido(14, new Pedido(null, TipoPedido.ENTREGA, TipoPagamento.CARTAO, 90.00, clienteDAO.findById(1)));
+		
+		pedidoDAO.deletePedido(14);
 		
 	}
 

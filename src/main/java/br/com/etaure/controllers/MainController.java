@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.etaure.daos.PizzaDAO;
 import br.com.etaure.entities.Pizza;
-import br.com.etaure.entities.enums.TamanhoDaPizza;
+import br.com.etaure.entities.enums.TamanhoPizza;
 
 /**
  * Servlet implementation class MainController
@@ -78,7 +78,7 @@ public class MainController extends HttpServlet {
 	private void addPizza(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Pizza pizza = new Pizza(null, request.getParameter("descricao"),
-				TamanhoDaPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
+				TamanhoPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
 				Double.valueOf(request.getParameter("preco")));
 		System.out.println(pizza);
 		pizzaDAO.insert(pizza);
@@ -103,7 +103,7 @@ public class MainController extends HttpServlet {
 	private void updateOldPizza(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Pizza pizza = new Pizza(Integer.valueOf(request.getParameter("id")), request.getParameter("descricao"),
-				TamanhoDaPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
+				TamanhoPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
 				Double.valueOf(request.getParameter("preco")));
 
 		pizzaDAO.updatePizza(pizza.getId(), pizza);

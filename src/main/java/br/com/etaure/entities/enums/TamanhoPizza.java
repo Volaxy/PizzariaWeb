@@ -1,6 +1,6 @@
 package br.com.etaure.entities.enums;
 
-public enum TamanhoDaPizza {
+public enum TamanhoPizza {
 
 	PEQUENA(1, "Pequena"),
 	MEDIA(2, "Media"),
@@ -9,7 +9,7 @@ public enum TamanhoDaPizza {
 	private Integer code;
 	private String descricao;
 	
-	private TamanhoDaPizza(Integer code, String descricao) {
+	private TamanhoPizza(Integer code, String descricao) {
 		this.code = code;
 		this.descricao = descricao;
 	}
@@ -22,11 +22,11 @@ public enum TamanhoDaPizza {
 		return descricao;
 	}
 	
-	public static TamanhoDaPizza toEnum(Integer code) {
+	public static TamanhoPizza toEnum(Integer code) {
 		if(code == null) {
 			return null;
 		} else {
-			for (TamanhoDaPizza tamanho : TamanhoDaPizza.values()) {
+			for (TamanhoPizza tamanho : TamanhoPizza.values()) {
 				if(code.equals(tamanho.getCode())) {
 					return tamanho;
 				}

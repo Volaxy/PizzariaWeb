@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import br.com.etaure.entities.enums.TamanhoDaPizza;
+import br.com.etaure.entities.enums.TamanhoPizza;
 
 @Entity
 public class Pizza {
@@ -25,7 +25,7 @@ public class Pizza {
 	private String descricao;
 	
 	@Enumerated(value = EnumType.STRING)
-	private TamanhoDaPizza tamanho;
+	private TamanhoPizza tamanho;
 	private Double preco;
 	
 	@OneToMany(mappedBy = "id.pizza")
@@ -35,7 +35,7 @@ public class Pizza {
 		
 	}
 
-	public Pizza(Integer id, String descricao, TamanhoDaPizza tamanho, Double preco) {
+	public Pizza(Integer id, String descricao, TamanhoPizza tamanho, Double preco) {
 		this.id = id;
 		this.descricao = descricao;
 		this.tamanho = tamanho;
@@ -58,11 +58,11 @@ public class Pizza {
 		this.descricao = descricao;
 	}
 
-	public TamanhoDaPizza getTamanho() {
+	public TamanhoPizza getTamanho() {
 		return tamanho;
 	}
 
-	public void setTamanho(TamanhoDaPizza tamanho) {
+	public void setTamanho(TamanhoPizza tamanho) {
 		this.tamanho = tamanho;
 	}
 

@@ -1,4 +1,4 @@
-package br.com.etaure.entities;
+package br.com.etaure.entities.pks;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -6,6 +6,9 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import br.com.etaure.entities.Ingrediente;
+import br.com.etaure.entities.Pizza;
 
 @Embeddable
 public class PizzaIngredientePK implements Serializable {

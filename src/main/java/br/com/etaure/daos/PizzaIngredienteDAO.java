@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 import br.com.etaure.entities.Ingrediente;
 import br.com.etaure.entities.Pizza;
 import br.com.etaure.entities.PizzaIngrediente;
-import br.com.etaure.entities.PizzaIngredientePK;
+import br.com.etaure.entities.pks.PizzaIngredientePK;
 
 public class PizzaIngredienteDAO {
 
