@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import br.com.etaure.entities.enums.TamanhoDaPizza;
 
 @Entity
-public class Pizza {
-
+public class Pizza{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

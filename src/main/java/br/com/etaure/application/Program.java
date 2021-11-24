@@ -3,6 +3,7 @@ package br.com.etaure.application;
 public class Program {
 
 //	private static PizzaDAO pizzaDAO = new PizzaDAO();
+//	private static EnderecoDAO enderecoDAO = new EnderecoDAO();
 	
 	public static void main(String[] args) {
 		
@@ -22,6 +23,23 @@ public class Program {
 //		pizzaDAO.updatePizza(1, pizza);
 		
 //		pizzaDAO.deletePizza(1);
+		
+		// Métodos para Endereço CRUD
+//		Endereco endereco = new Endereco(null, "Viana", "Bairro de Viana", "Rua de Viana", 89, "Perto de Viana");
+//		enderecoDAO.insert(endereco);
+		
+//		List<Endereco> enderecos = enderecoDAO.findAll();
+//		for (Endereco endereco : enderecos) {
+//			System.out.println(endereco);
+//		}
+//		
+//		Endereco endereco = enderecoDAO.findById(4);
+//		System.out.println(endereco);
+		
+//		Endereco endereco = new Endereco(null, "Viana", "Bairro de Viana", "Rua de Viana", 89, "Perto de Viana");
+//		enderecoDAO.updateEndereco(3, endereco);
+//		
+//		enderecoDAO.deleteEndereco(4);
 		
 	}
 
