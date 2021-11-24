@@ -1,6 +1,10 @@
 package br.com.etaure.entities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,11 +12,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import br.com.etaure.entities.enums.TamanhoDaPizza;
 
 @Entity
-public class Pizza{
+public class Pizza {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +27,9 @@ public class Pizza{
 	@Enumerated(value = EnumType.STRING)
 	private TamanhoDaPizza tamanho;
 	private Double preco;
+	
+	@OneToMany(mappedBy = "id.pizza")
+	private Set<PizzaIngrediente> pizzaIngredientes = new HashSet<PizzaIngrediente>();
 	
 	public Pizza() {
 		
@@ -66,6 +74,24 @@ public class Pizza{
 		this.preco = preco;
 	}
 
+	public Set<PizzaIngrediente> getPizzaIngredientes() {
+		return pizzaIngredientes;
+	}
+
+	public void setPizzaIngredientes(Set<PizzaIngrediente> pizzaIngredientes) {
+		this.pizzaIngredientes = pizzaIngredientes;
+	}
+	
+		public List<Ingrediente> getIngredientes() {
+			List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+			
+			for (PizzaIngrediente pizzaIngrediente : pizzaIngredientes) {
+				ingredientes.add(pizzaIngrediente.getIngrediente());
+			}
+			
+			return ingredientes;
+		}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -85,7 +111,10 @@ public class Pizza{
 
 	@Override
 	public String toString() {
-		return "Pizza [id=" + id + ", descricao=" + descricao + ", tamanho=" + tamanho + ", preco=" + preco + "]";
+		return "Pizza [id=" + id + ", descricao=" + descricao + ", tamanho=" + tamanho + ", preco=" + preco
+				+ "]";
 	}
+
+	
 	
 }

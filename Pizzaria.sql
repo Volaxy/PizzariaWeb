@@ -25,9 +25,9 @@ create table Cliente (
     nome varchar(50) not null,
     cpf varchar(15) not null,
     
-    id_endereco int not null,
+    id_endereco int,
     
-    foreign key (id_endereco) references Endereco(id)
+    foreign key (id_endereco) references Endereco(id) on delete set null
 );
 
 create table Pedido (
@@ -38,13 +38,13 @@ create table Pedido (
 	
     id_cliente int not null,
     
-    foreign key (id_cliente) references Cliente(id)
+    foreign key (id_cliente) references Cliente(id) on delete cascade
 );
 
 create table Pizza (
 	id int primary key auto_increment,
-    descricao varchar(25) not null,
-    tamanho enum("Pequena", "Media", "Grande") not null,
+    descricao varchar(25) not null unique,
+    tamanho enum("PEQUENA", "MEDIA", "GRANDE") not null,
     preco double not null
 );
 
@@ -54,8 +54,8 @@ create table Pizza_Ingrediente (
     
     quantidade int not null,
     
-    foreign key (id_pizza) references Pizza(id),
-    foreign key (id_ingrediente) references Ingrediente(id)
+    foreign key (id_pizza) references Pizza(id) on delete cascade,
+    foreign key (id_ingrediente) references Ingrediente(id) on delete cascade
 );
 
 create table pizza_pedido (
@@ -64,18 +64,21 @@ create table pizza_pedido (
     
     quantidade int not null,
     
-    foreign key (id_pizza) references Pizza(id),
-    foreign key (id_pedido) references Pedido(id)
+    foreign key (id_pizza) references Pizza(id) on delete cascade,
+    foreign key (id_pedido) references Pedido(id) on delete cascade
 );
 
 /* Alteração das Tabelas */
 alter table Cliente drop column pagamento;
 alter table Cliente modify column cpf varchar(15);
-alter table Pizza add descricao varchar(25) not null after id;
-alter table Pizza_Pedido add subTotal double not null;
+alter table Pizza modify column descricao varchar(25) not null unique;
+alter table Pizza add descricao varchar(15);
 ALTER TABLE `pizzaria`.`pizza`
 CHANGE COLUMN `descricao` `descricao` VARCHAR(15) NOT NULL AFTER `id`,
 ADD UNIQUE INDEX `descricao_UNIQUE` (`descricao` ASC) VISIBLE;
+alter table Pizza modify column tamanho enum("PEQUENA", "MEDIA", "GRANDE");
+SET foreign_key_checks = 1;
+delete from pizza where id = 1;
 
 /************************************** CRUD's *******************************************************/
 
@@ -130,11 +133,11 @@ insert into Pizza_Ingrediente(id_pizza, id_ingrediente, quantidade) values
 (1, 1, 5),
 (2, 4, 1);
 
-insert into Pizza_Pedido(id_pizza, id_pedido, quantidade, subTotal) values
-(1, 1, 2, 30.50),
-(2, 2, 1, 25),
-(1, 3, 3, 39),
-(2, 3, 5, 20);
+insert into Pizza_Pedido(id_pizza, id_pedido, quantidade) values
+(1, 1, 2),
+(2, 2, 1),
+(1, 3, 3),
+(2, 3, 5);
 
 /* Read */
 	/* Seleciona os dados da Tabela */
@@ -147,3 +150,4 @@ insert into Pizza_Pedido(id_pizza, id_pedido, quantidade, subTotal) values
 	select * from pizza_pedido;
 
 	/* Select's Específicos */
+    select * from pizza join pizza_pedido on pizza.id = pizza_pedido.id_pizza;

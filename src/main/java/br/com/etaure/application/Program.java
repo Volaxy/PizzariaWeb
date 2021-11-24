@@ -2,18 +2,18 @@ package br.com.etaure.application;
 
 import java.util.List;
 
-import br.com.etaure.daos.ClienteDAO;
-import br.com.etaure.daos.EnderecoDAO;
 import br.com.etaure.daos.IngredienteDAO;
-import br.com.etaure.entities.Cliente;
-import br.com.etaure.entities.Ingrediente;
+import br.com.etaure.daos.PizzaDAO;
+import br.com.etaure.daos.PizzaIngredienteDAO;
+import br.com.etaure.entities.PizzaIngrediente;
 
 public class Program {
 
-//	private static PizzaDAO pizzaDAO = new PizzaDAO();
+	private static PizzaDAO pizzaDAO = new PizzaDAO();
 //	private static EnderecoDAO enderecoDAO = new EnderecoDAO();
 //	private static ClienteDAO clienteDAO = new ClienteDAO();
 	private static IngredienteDAO ingredienteDAO = new IngredienteDAO();
+	private static PizzaIngredienteDAO pizzaIngredienteDAO = new PizzaIngredienteDAO();
 	
 	public static void main(String[] args) {
 		
@@ -83,6 +83,19 @@ public class Program {
 //		ingredienteDAO.updateIngrediente(9, ingrediente);
 
 //		ingredienteDAO.deleteIngrediente(5);
+		
+//		PizzaIngrediente pi = new PizzaIngrediente(pizzaDAO.findById(6), ingredienteDAO.findById(4), 3);
+//		pizzaIngredienteDAO.insert(pi);
+		
+//		List<PizzaIngrediente> pizzaIngredientes = pizzaIngredienteDAO.findAll();
+//		for (PizzaIngrediente pizzaIngrediente : pizzaIngredientes) {
+//			System.out.println(pizzaIngrediente);
+//		}
+		
+//		PizzaIngrediente pizzaIngrediente = pizzaIngredienteDAO.findById(pizzaDAO.findById(2), ingredienteDAO.findById(6));
+//		System.out.println(pizzaIngrediente);
+		
+		pizzaIngredienteDAO.deletePizzaIngrediente(pizzaDAO.findById(2), ingredienteDAO.findById(6));
 		
 	}
 
