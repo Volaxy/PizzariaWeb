@@ -44,6 +44,20 @@ public class PizzaIngredienteDAO {
 		return em.find(PizzaIngrediente.class, new PizzaIngredientePK(pizza, ingrediente));
 	}
 
+	// Atualiza um PizzaIngrediente
+	public void updatePizzaIngrediente(PizzaIngrediente newPizzaIngrediente) {
+		createEntityManager();
+
+		PizzaIngrediente oldPizzaIngrediente = em.find(PizzaIngrediente.class, newPizzaIngrediente.getId());
+
+		em.getTransaction().begin();
+
+		oldPizzaIngrediente.setId(newPizzaIngrediente.getId());
+		oldPizzaIngrediente.setQuantidade(newPizzaIngrediente.getQuantidade());
+		
+		em.getTransaction().commit();
+	}
+
 	// Deleta um PizzaIngrediente
 	public void deletePizzaIngrediente(Pizza pizza, Ingrediente ingrediente) {
 		createEntityManager();

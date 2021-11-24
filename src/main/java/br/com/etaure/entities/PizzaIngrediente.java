@@ -32,7 +32,8 @@ public class PizzaIngrediente {
 	}
 
 	public void setId(PizzaIngredientePK id) {
-		this.id = id;
+		this.id.setPizza(id.getPizza());
+		this.id.setIngrediente(id.getIngrediente());
 	}
 	
 		public Pizza getPizza() {

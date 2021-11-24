@@ -29,12 +29,13 @@ public class PizzaPedido {
 		this.subTotal = subTotal;
 	}
 
-	public PizzaPedidoPK getPizzaPedidoPK() {
+	public PizzaPedidoPK getId() {
 		return id;
 	}
 
-	public void setPizzaPedidoPK(PizzaPedidoPK id) {
-		this.id = id;
+	public void setId(PizzaPedidoPK id) {
+		this.id.setPizza(id.getPizza());
+		this.id.setPedido(id.getPedido());
 	}
 	
 		public Pizza getPizza() {
