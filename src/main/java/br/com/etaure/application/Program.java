@@ -1,18 +1,19 @@
 package br.com.etaure.application;
 
-import java.util.List;
-
-import br.com.etaure.daos.ClienteDAO;
 import br.com.etaure.daos.PedidoDAO;
+import br.com.etaure.daos.PizzaDAO;
 import br.com.etaure.entities.Pedido;
+import br.com.etaure.entities.Pizza;
+import br.com.etaure.entities.PizzaPedido;
+import br.com.etaure.entities.enums.TamanhoPizza;
 import br.com.etaure.entities.enums.TipoPagamento;
 import br.com.etaure.entities.enums.TipoPedido;
 
 public class Program {
 
-//	private static PizzaDAO pizzaDAO = new PizzaDAO();
+	private static PizzaDAO pizzaDAO = new PizzaDAO();
 //	private static EnderecoDAO enderecoDAO = new EnderecoDAO();
-	private static ClienteDAO clienteDAO = new ClienteDAO();
+//	private static ClienteDAO clienteDAO = new ClienteDAO();
 //	private static IngredienteDAO ingredienteDAO = new IngredienteDAO();
 //	private static PizzaIngredienteDAO pizzaIngredienteDAO = new PizzaIngredienteDAO();
 	private static PedidoDAO pedidoDAO = new PedidoDAO();
@@ -114,7 +115,10 @@ public class Program {
 		
 //		pedidoDAO.updatePedido(14, new Pedido(null, TipoPedido.ENTREGA, TipoPagamento.CARTAO, 90.00, clienteDAO.findById(1)));
 		
-		pedidoDAO.deletePedido(14);
+//		pedidoDAO.deletePedido(14);
+		
+		PizzaPedido pizzaPedido = new PizzaPedido(pizzaDAO.findById(4), pedidoDAO.findById(13), 2, 35.00);
+		System.out.println(pizzaPedido);
 		
 	}
 

@@ -31,6 +31,9 @@ public class Pizza {
 	@OneToMany(mappedBy = "id.pizza")
 	private Set<PizzaIngrediente> pizzaIngredientes = new HashSet<PizzaIngrediente>();
 	
+	@OneToMany(mappedBy = "id.pizza")
+	private Set<PizzaPedido> pizzaPedidos = new HashSet<PizzaPedido>();
+	
 	public Pizza() {
 		
 	}
@@ -90,6 +93,24 @@ public class Pizza {
 			}
 			
 			return ingredientes;
+		}
+
+	public Set<PizzaPedido> getPizzaPedidos() {
+		return pizzaPedidos;
+	}
+
+	public void setPizzaPedidos(Set<PizzaPedido> pizzaPedidos) {
+		this.pizzaPedidos = pizzaPedidos;
+	}
+	
+		public List<Pedido> getPedidos() {
+			List<Pedido> pedidos = new ArrayList<Pedido>();
+			
+			for (PizzaPedido pizzaPedido : pizzaPedidos) {
+				pedidos.add(pizzaPedido.getPedido());
+			}
+			
+			return pedidos;
 		}
 
 	@Override

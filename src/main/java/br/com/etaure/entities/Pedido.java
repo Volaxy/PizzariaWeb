@@ -1,6 +1,10 @@
 package br.com.etaure.entities;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import br.com.etaure.entities.enums.TipoPagamento;
 import br.com.etaure.entities.enums.TipoPedido;
@@ -34,6 +39,9 @@ public class Pedido {
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
+	
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<PizzaPedido> pizzaPedidos = new HashSet<PizzaPedido>();
 	
 	public Pedido() {
 		
@@ -86,6 +94,24 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	public Set<PizzaPedido> getPizzaPedidos() {
+		return pizzaPedidos;
+	}
+
+	public void setPizzaPedidos(Set<PizzaPedido> pizzaPedidos) {
+		this.pizzaPedidos = pizzaPedidos;
+	}
+	
+		public List<Pizza> getPizzas() {
+			List<Pizza> pizzas = new ArrayList<Pizza>();
+			
+			for (PizzaPedido pizza : pizzaPedidos) {
+				pizzas.add(pizza.getPizza());
+			}
+			
+			return pizzas;
+		}
 
 	@Override
 	public int hashCode() {
