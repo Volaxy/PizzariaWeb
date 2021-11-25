@@ -29,7 +29,7 @@ public enum TipoPagamento {
 		this.descricao = descricao;
 	}
 	
-	public TipoPagamento toEnum(Integer code) {
+	public static TipoPagamento toEnum(Integer code) {
 		if(code == null) {
 			return null;
 		}

@@ -15,7 +15,7 @@ public class PizzaPedidoDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -23,7 +23,7 @@ public class PizzaPedidoDAO {
 	}
 
 	// Insere um novo PizzaPedido
-	public void insert(PizzaPedido pizzaPedido) {
+	public static void insert(PizzaPedido pizzaPedido) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -31,21 +31,21 @@ public class PizzaPedidoDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<PizzaPedido> findAll() {
+	public static List<PizzaPedido> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT pp FROM PizzaPedido pp";
 		return em.createQuery(jpql, PizzaPedido.class).getResultList();
 	}
 
-	public PizzaPedido findById(Pizza pizza, Pedido pedido) {
+	public static PizzaPedido findById(Pizza pizza, Pedido pedido) {
 		createEntityManager();
 
 		return em.find(PizzaPedido.class, new PizzaPedidoPK(pizza, pedido));
 	}
 
 	// Atualiza um PizzaPedido
-	public void updatePizzaPedido(PizzaPedido newPizzaPedido) {
+	public static void updatePizzaPedido(PizzaPedido newPizzaPedido) {
 		createEntityManager();
 
 		PizzaPedido oldPizzaPedido = em.find(PizzaPedido.class, newPizzaPedido.getId());
@@ -60,7 +60,7 @@ public class PizzaPedidoDAO {
 	}
 
 	// Deleta um PizzaPedido
-	public void deletePizzaPedido(Pizza pizza, Pedido pedido) {
+	public static void deletePizzaPedido(Pizza pizza, Pedido pedido) {
 		createEntityManager();
 
 		PizzaPedido pizzaPedido = em.find(PizzaPedido.class, new PizzaPedidoPK(pizza, pedido));

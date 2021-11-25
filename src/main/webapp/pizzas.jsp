@@ -46,11 +46,6 @@ List<PedidoComNomeClienteDTO> pedidos = (ArrayList<PedidoComNomeClienteDTO>) req
 					<td><%=pedido.getTipoPagamento()%></td>
 					<td><%=pedido.getTotal()%></td>
 					<td><%=pedido.getNomeCliente()%></td>
-					<td><a class="div__pizzas__update button__link"
-						href="updatePedido?id=<%=pedido.getId()%>">Atualizar</a></td>
-					<td><a class="div__pizzas__delete button__link"
-						href="javascript: confirmarExclusao(<%=pedido.getId()%>)">Excluir</a>
-					</td>
 				</tr>
 				<%
 				}
@@ -61,7 +56,7 @@ List<PedidoComNomeClienteDTO> pedidos = (ArrayList<PedidoComNomeClienteDTO>) req
 		<div class="buttons">
 			<a class="div__pedidos__presencial button__link"
 				href="javascript: presencial()">Presencial</a> <a
-				class="div__pedidos__add button__link" href="#">Registrar Pedido</a>
+				class="div__pedidos__add button__link" href="newPedido.jsp">Registrar Pedido</a>
 			<a class="div__pedidos__entrega button__link"
 				href="javascript: entrega()">Entrega</a>
 		</div>
@@ -89,7 +84,7 @@ List<PedidoComNomeClienteDTO> pedidos = (ArrayList<PedidoComNomeClienteDTO>) req
 					<td><%=pizza.getTamanho()%></td>
 					<td><%=pizza.getPreco()%></td>
 					<td><a class="div__pizzas__update button__link"
-						href="updatePizza?id=<%=pizza.getId()%>">Atualizar</a></td>
+						href="updatePizzaPage?id=<%=pizza.getId()%>">Atualizar</a></td>
 					<td><a class="div__pizzas__delete button__link"
 						href="javascript: confirmarExclusao(<%=pizza.getId()%>)">Excluir</a>
 					</td>

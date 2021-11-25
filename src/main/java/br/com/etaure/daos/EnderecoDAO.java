@@ -12,7 +12,7 @@ public class EnderecoDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -20,7 +20,7 @@ public class EnderecoDAO {
 	}
 
 	// Insere uma novo Endereço
-	public void insert(Endereco endereco) {
+	public static void insert(Endereco endereco) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -28,21 +28,21 @@ public class EnderecoDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<Endereco> findAll() {
+	public static List<Endereco> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT e FROM Endereco e";
 		return em.createQuery(jpql, Endereco.class).getResultList();
 	}
 
-	public Endereco findById(Integer id) {
+	public static Endereco findById(Integer id) {
 		createEntityManager();
 
 		return em.find(Endereco.class, id);
 	}
 
 	// Atualiza a Endereco
-	public void updateEndereco(Integer id, Endereco newEndereco) {
+	public static void updateEndereco(Integer id, Endereco newEndereco) {
 		createEntityManager();
 
 		Endereco oldEndereco = em.find(Endereco.class, id);
@@ -59,7 +59,7 @@ public class EnderecoDAO {
 	}
 
 	// Deleta a Endereco
-	public void deleteEndereco(Integer id) {
+	public static void deleteEndereco(Integer id) {
 		createEntityManager();
 
 		Endereco endereco = em.find(Endereco.class, id);

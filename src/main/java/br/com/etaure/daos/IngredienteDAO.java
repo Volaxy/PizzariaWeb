@@ -12,7 +12,7 @@ public class IngredienteDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -20,7 +20,7 @@ public class IngredienteDAO {
 	}
 
 	// Insere um novo Ingrediente
-	public void insert(Ingrediente ingrediente) {
+	public static void insert(Ingrediente ingrediente) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -28,21 +28,21 @@ public class IngredienteDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<Ingrediente> findAll() {
+	public static List<Ingrediente> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT i FROM Ingrediente i";
 		return em.createQuery(jpql, Ingrediente.class).getResultList();
 	}
 
-	public Ingrediente findById(Integer id) {
+	public static Ingrediente findById(Integer id) {
 		createEntityManager();
 
 		return em.find(Ingrediente.class, id);
 	}
 
 	// Atualiza um Ingrediente
-	public void updateIngrediente(Integer id, Ingrediente newIngrediente) {
+	public static void updateIngrediente(Integer id, Ingrediente newIngrediente) {
 		createEntityManager();
 
 		Ingrediente oldIngrediente = em.find(Ingrediente.class, id);
@@ -55,7 +55,7 @@ public class IngredienteDAO {
 	}
 
 	// Deleta um Ingrediente
-	public void deleteIngrediente(Integer id) {
+	public static void deleteIngrediente(Integer id) {
 		createEntityManager();
 
 		Ingrediente ingrediente = em.find(Ingrediente.class, id);

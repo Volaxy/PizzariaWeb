@@ -12,7 +12,7 @@ public class PedidoDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -20,7 +20,7 @@ public class PedidoDAO {
 	}
 
 	// Insere um novo Pedido
-	public void insert(Pedido pedido) {
+	public static void insert(Pedido pedido) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -28,21 +28,21 @@ public class PedidoDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<Pedido> findAll() {
+	public static List<Pedido> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT p FROM Pedido p";
 		return em.createQuery(jpql, Pedido.class).getResultList();
 	}
 
-	public Pedido findById(Integer id) {
+	public static Pedido findById(Integer id) {
 		createEntityManager();
 
 		return em.find(Pedido.class, id);
 	}
 
 	// Atualiza um Pedido
-	public void updatePedido(Integer id, Pedido newPedido) {
+	public static void updatePedido(Integer id, Pedido newPedido) {
 		createEntityManager();
 
 		Pedido oldPedido = em.find(Pedido.class, id);
@@ -58,7 +58,7 @@ public class PedidoDAO {
 	}
 
 	// Deleta um Pedido
-	public void deletePedido(Integer id) {
+	public static void deletePedido(Integer id) {
 		createEntityManager();
 
 		Pedido pedido = em.find(Pedido.class, id);

@@ -12,7 +12,7 @@ public class PizzaDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -20,7 +20,7 @@ public class PizzaDAO {
 	}
 
 	// Insere uma nova Pizza
-	public void insert(Pizza pizza) {
+	public static void insert(Pizza pizza) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -28,21 +28,21 @@ public class PizzaDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<Pizza> findAll() {
+	public static List<Pizza> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT p FROM Pizza p";
 		return em.createQuery(jpql, Pizza.class).getResultList();
 	}
 
-	public Pizza findById(Integer id) {
+	public static Pizza findById(Integer id) {
 		createEntityManager();
 
 		return em.find(Pizza.class, id);
 	}
 
 	// Atualiza a Pizza
-	public void updatePizza(Integer id, Pizza newPizza) {
+	public static void updatePizza(Integer id, Pizza newPizza) {
 		createEntityManager();
 
 		Pizza oldPizza = em.find(Pizza.class, id);
@@ -57,7 +57,7 @@ public class PizzaDAO {
 	}
 
 	// Deleta a Pizza
-	public void deletePizza(Integer id) {
+	public static void deletePizza(Integer id) {
 		createEntityManager();
 		
 		Pizza pizza = em.find(Pizza.class, id);

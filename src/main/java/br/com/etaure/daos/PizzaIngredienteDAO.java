@@ -15,7 +15,7 @@ public class PizzaIngredienteDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -23,7 +23,7 @@ public class PizzaIngredienteDAO {
 	}
 
 	// Insere um novo PizzaIngrediente
-	public void insert(PizzaIngrediente pizzaIngrediente) {
+	public static void insert(PizzaIngrediente pizzaIngrediente) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -31,21 +31,21 @@ public class PizzaIngredienteDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<PizzaIngrediente> findAll() {
+	public static List<PizzaIngrediente> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT pi FROM PizzaIngrediente pi";
 		return em.createQuery(jpql, PizzaIngrediente.class).getResultList();
 	}
 
-	public PizzaIngrediente findById(Pizza pizza, Ingrediente ingrediente) {
+	public static PizzaIngrediente findById(Pizza pizza, Ingrediente ingrediente) {
 		createEntityManager();
 
 		return em.find(PizzaIngrediente.class, new PizzaIngredientePK(pizza, ingrediente));
 	}
 
 	// Atualiza um PizzaIngrediente
-	public void updatePizzaIngrediente(PizzaIngrediente newPizzaIngrediente) {
+	public static void updatePizzaIngrediente(PizzaIngrediente newPizzaIngrediente) {
 		createEntityManager();
 
 		PizzaIngrediente oldPizzaIngrediente = em.find(PizzaIngrediente.class, newPizzaIngrediente.getId());
@@ -59,7 +59,7 @@ public class PizzaIngredienteDAO {
 	}
 
 	// Deleta um PizzaIngrediente
-	public void deletePizzaIngrediente(Pizza pizza, Ingrediente ingrediente) {
+	public static void deletePizzaIngrediente(Pizza pizza, Ingrediente ingrediente) {
 		createEntityManager();
 
 		PizzaIngrediente pizzaIngrediente = em.find(PizzaIngrediente.class, new PizzaIngredientePK(pizza, ingrediente));

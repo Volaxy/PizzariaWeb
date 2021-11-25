@@ -12,7 +12,7 @@ public class ClienteDAO {
 
 	private static EntityManager em;
 
-	private void createEntityManager() {
+	private static void createEntityManager() {
 		if (em == null) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("Pizzaria Web");
 			em = factory.createEntityManager();
@@ -20,7 +20,7 @@ public class ClienteDAO {
 	}
 
 	// Insere um novo Cliente
-	public void insert(Cliente cliente) {
+	public static void insert(Cliente cliente) {
 		createEntityManager();
 
 		em.getTransaction().begin();
@@ -28,21 +28,21 @@ public class ClienteDAO {
 		em.getTransaction().commit();
 	}
 
-	public List<Cliente> findAll() {
+	public static List<Cliente> findAll() {
 		createEntityManager();
 
 		String jpql = "SELECT c FROM Cliente c";
 		return em.createQuery(jpql, Cliente.class).getResultList();
 	}
 
-	public Cliente findById(Integer id) {
+	public static Cliente findById(Integer id) {
 		createEntityManager();
 
 		return em.find(Cliente.class, id);
 	}
 
 	// Atualiza um Cliente
-	public void updateCliente(Integer id, Cliente newCliente) {
+	public static void updateCliente(Integer id, Cliente newCliente) {
 		createEntityManager();
 
 		Cliente oldCliente = em.find(Cliente.class, id);
@@ -57,7 +57,7 @@ public class ClienteDAO {
 	}
 
 	// Deleta um Cliente
-	public void deleteCliente(Integer id) {
+	public static void deleteCliente(Integer id) {
 		createEntityManager();
 
 		Cliente cliente = em.find(Cliente.class, id);

@@ -11,24 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.etaure.daos.ClienteDAO;
 import br.com.etaure.daos.PedidoDAO;
 import br.com.etaure.daos.PizzaDAO;
 import br.com.etaure.entities.Pedido;
 import br.com.etaure.entities.Pizza;
 import br.com.etaure.entities.dto.PedidoComNomeClienteDTO;
 import br.com.etaure.entities.enums.TamanhoPizza;
+import br.com.etaure.entities.enums.TipoPagamento;
 import br.com.etaure.entities.enums.TipoPedido;
 
 /**
  * Servlet implementation class MainController
  */
-@WebServlet(urlPatterns = { "/MainController", "/main", "/addPizza", "/updatePizza", "/updateOldPizza",
-		"/deletePizza", "/filtrarPresencial", "/filtrarEntrega"})
+@WebServlet(urlPatterns = { "/MainController", "/main", "/addPizza", "/updatePizzaPage", "/updateOldPizza",
+		"/deletePizza", "/filtrarPresencial", "/filtrarEntrega", "/addPedido"})
 public class MainController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	private PizzaDAO pizzaDAO = new PizzaDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -54,8 +54,8 @@ public class MainController extends HttpServlet {
 		case "/addPizza":
 			addPizza(request, response);
 			break;
-		case "/updatePizza":
-			updatePizza(request, response);
+		case "/updatePizzaPage":
+			updatePizzaPage(request, response);
 			break;
 		case "/updateOldPizza":
 			updateOldPizza(request, response);
@@ -69,6 +69,9 @@ public class MainController extends HttpServlet {
 		case "/filtrarEntrega":
 			filtrarEntrega(request, response);
 			break;
+		case "/addPedido":
+			addPedido(request, response);
+			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + action);
 		}
@@ -76,16 +79,15 @@ public class MainController extends HttpServlet {
 
 	private void listPedidos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Pizza> pizzas = pizzaDAO.findAll();
+		List<Pizza> pizzas = PizzaDAO.findAll();
 
 		// Define uma variável contendo a lista de pizzas e direciona essa variável ao
 		// documento "pizzas.jsp"
 		request.setAttribute("pizzas", pizzas);
 		
-		PedidoDAO pedidoDAO = new PedidoDAO();
 		List<PedidoComNomeClienteDTO> pedidos = new ArrayList<PedidoComNomeClienteDTO>();
 		
-		pedidoDAO.findAll().forEach(p -> {
+		PedidoDAO.findAll().forEach(p -> {
 			pedidos.add(new PedidoComNomeClienteDTO(p));
 		});
 		
@@ -101,16 +103,16 @@ public class MainController extends HttpServlet {
 				TamanhoPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
 				Double.valueOf(request.getParameter("preco")));
 		System.out.println(pizza);
-		pizzaDAO.insert(pizza);
+		PizzaDAO.insert(pizza);
 
 		response.sendRedirect("main");
 	}
 
-	private void updatePizza(HttpServletRequest request, HttpServletResponse response)
+	private void updatePizzaPage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Integer idSelectedPizza = Integer.valueOf(request.getParameter("id"));
 
-		Pizza pizza = pizzaDAO.findById(idSelectedPizza);
+		Pizza pizza = PizzaDAO.findById(idSelectedPizza);
 		request.setAttribute("id", pizza.getId());
 		request.setAttribute("name", pizza.getDescricao());
 		request.setAttribute("size", pizza.getTamanho().getCode());
@@ -126,7 +128,7 @@ public class MainController extends HttpServlet {
 				TamanhoPizza.toEnum(Integer.valueOf(request.getParameter("tamanho"))),
 				Double.valueOf(request.getParameter("preco")));
 
-		pizzaDAO.updatePizza(pizza.getId(), pizza);
+		PizzaDAO.updatePizza(pizza.getId(), pizza);
 
 		response.sendRedirect("main");
 	}
@@ -135,7 +137,7 @@ public class MainController extends HttpServlet {
 			throws ServletException, IOException {
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		
-		pizzaDAO.deletePizza(id);
+		PizzaDAO.deletePizza(id);
 		
 		response.sendRedirect("main");
 	}
@@ -157,8 +159,7 @@ public class MainController extends HttpServlet {
 		private List<PedidoComNomeClienteDTO> getPedidosFiltrados(TipoPedido tipoPedido) {
 			List<PedidoComNomeClienteDTO> pedidosComNome = new ArrayList<PedidoComNomeClienteDTO>();
 			
-			PedidoDAO pedidoDAO = new PedidoDAO();
-			List<Pedido> pedidos = pedidoDAO.findAll();
+			List<Pedido> pedidos = PedidoDAO.findAll();
 			for (Pedido pedido : pedidos) {
 				if(pedido.getTipoPedido() == tipoPedido) {
 					pedidosComNome.add(new PedidoComNomeClienteDTO(pedido));
@@ -169,7 +170,7 @@ public class MainController extends HttpServlet {
 		}
 		
 		private void redirecionarPedidos(HttpServletRequest request, HttpServletResponse response, List<PedidoComNomeClienteDTO> pedidosComNome) throws ServletException, IOException {
-			List<Pizza> pizzas = pizzaDAO.findAll();
+			List<Pizza> pizzas = PizzaDAO.findAll();
 			
 			request.setAttribute("pedidos", pedidosComNome);
 			request.setAttribute("pizzas", pizzas);
@@ -177,5 +178,17 @@ public class MainController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("pizzas.jsp");
 			rd.forward(request, response);
 		}
+		
+	private void addPedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Pedido pedido = new Pedido(null,
+				TipoPedido.toEnum(Integer.valueOf(request.getParameter("entrega"))),
+				TipoPagamento.toEnum(Integer.valueOf(request.getParameter("pagamento"))),
+				Double.parseDouble(request.getParameter("preco")),
+				ClienteDAO.findById(Integer.parseInt(request.getParameter("idCliente"))));
+		
+		PedidoDAO.insert(pedido);
+
+		response.sendRedirect("main");
+	}
 
 }
