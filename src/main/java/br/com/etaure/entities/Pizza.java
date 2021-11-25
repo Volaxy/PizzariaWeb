@@ -1,5 +1,6 @@
 package br.com.etaure.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +18,9 @@ import javax.persistence.OneToMany;
 import br.com.etaure.entities.enums.TamanhoPizza;
 
 @Entity
-public class Pizza {
+public class Pizza implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
