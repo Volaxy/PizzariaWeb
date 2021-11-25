@@ -1,5 +1,6 @@
 package br.com.etaure.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
@@ -10,7 +11,9 @@ import br.com.etaure.entities.pks.PizzaIngredientePK;
 
 @Entity
 @Table(name = "pizza_ingrediente")
-public class PizzaIngrediente {
+public class PizzaIngrediente implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private PizzaIngredientePK id = new PizzaIngredientePK();
