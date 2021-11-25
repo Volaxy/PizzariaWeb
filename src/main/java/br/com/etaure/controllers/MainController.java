@@ -1,6 +1,7 @@
 package br.com.etaure.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,10 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.etaure.daos.PedidoDAO;
 import br.com.etaure.daos.PizzaDAO;
 import br.com.etaure.entities.Pedido;
 import br.com.etaure.entities.Pizza;
+import br.com.etaure.entities.dto.PedidoComNomeClienteDTO;
 import br.com.etaure.entities.enums.TamanhoPizza;
+import br.com.etaure.entities.enums.TipoPedido;
 
 /**
  * Servlet implementation class MainController
@@ -77,6 +81,15 @@ public class MainController extends HttpServlet {
 		// Define uma variável contendo a lista de pizzas e direciona essa variável ao
 		// documento "pizzas.jsp"
 		request.setAttribute("pizzas", pizzas);
+		
+		PedidoDAO pedidoDAO = new PedidoDAO();
+		List<PedidoComNomeClienteDTO> pedidos = new ArrayList<PedidoComNomeClienteDTO>();
+		
+		pedidoDAO.findAll().forEach(p -> {
+			pedidos.add(new PedidoComNomeClienteDTO(p));
+		});
+		
+		request.setAttribute("pedidos", pedidos);
 
 		RequestDispatcher rd = request.getRequestDispatcher("pizzas.jsp");
 		rd.forward(request, response);
@@ -128,11 +141,41 @@ public class MainController extends HttpServlet {
 	}
 	
 	private void filtrarEntrega(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<PedidoComNomeClienteDTO> pedidosComNome = getPedidosFiltrados(TipoPedido.ENTREGA);
 		
+		redirecionarPedidos(request, response, pedidosComNome);
 	}
 
+	
+
 	private void filtrarPresencial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<PedidoComNomeClienteDTO> pedidosComNome = getPedidosFiltrados(TipoPedido.PRESENCIAL);
 		
+		redirecionarPedidos(request, response, pedidosComNome);
 	}
+	
+		private List<PedidoComNomeClienteDTO> getPedidosFiltrados(TipoPedido tipoPedido) {
+			List<PedidoComNomeClienteDTO> pedidosComNome = new ArrayList<PedidoComNomeClienteDTO>();
+			
+			PedidoDAO pedidoDAO = new PedidoDAO();
+			List<Pedido> pedidos = pedidoDAO.findAll();
+			for (Pedido pedido : pedidos) {
+				if(pedido.getTipoPedido() == tipoPedido) {
+					pedidosComNome.add(new PedidoComNomeClienteDTO(pedido));
+				}
+			}
+			
+			return pedidosComNome;
+		}
+		
+		private void redirecionarPedidos(HttpServletRequest request, HttpServletResponse response, List<PedidoComNomeClienteDTO> pedidosComNome) throws ServletException, IOException {
+			List<Pizza> pizzas = pizzaDAO.findAll();
+			
+			request.setAttribute("pedidos", pedidosComNome);
+			request.setAttribute("pizzas", pizzas);
+
+			RequestDispatcher rd = request.getRequestDispatcher("pizzas.jsp");
+			rd.forward(request, response);
+		}
 
 }
