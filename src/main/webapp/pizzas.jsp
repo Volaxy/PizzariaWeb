@@ -20,29 +20,36 @@
 	<title>Pizzas</title>
 </head>
 <body>
-	<table class="tablePedidos">
-		<caption>Pedidos</caption>
+	<div class="div__pedidos">
+		<table class="tablePedidos">
+			<caption>Pedidos</caption>
+			<thead>
+				<tr>
+					<th>Nº</th>
+					<th>Entrega</th>
+					<th>Pagamento</th>
+					<th>R$</th>
+					<th>Cliente</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Presencial</td>
+					<td>Dinheiro</td>
+					<td>20,00</td>
+					<td>Ana Maria</td>
+				</tr>
+			</tbody>
+		</table>
 
-		<thead>
-			<tr>
-				<th>Nº</th>
-				<th>Entrega</th>
-				<th>Pagamento</th>
-				<th>R$</th>
-				<th>Cliente</th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Presencial</td>
-				<td>Dinheiro</td>
-				<td>20,00</td>
-				<td>Ana Maria</td>
-			</tr>
-		</tbody>
-	</table>
+		<div class="buttons">
+			<a class="div__pedidos__presencial button__link" href="javascript: presencial()">Presencial</a>
+			<a class="div__pedidos__add button__link" href="#">Registrar Pedido</a>
+			<a class="div__pedidos__entrega button__link" href="javascript: entrega()">Entrega</a>
+		</div>
+	</div>
 
 	<div class="div__pizzas">
 		<table class="tablePizzas">
@@ -55,8 +62,9 @@
 					<th>R$</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<% for(Pizza pizza : pizzas) { %>
+				<!--<% for(Pizza pizza : pizzas) { %>
 					<tr>
 						<td><%= pizza.getId() %></td>
 						<td><%= pizza.getDescricao() %></td>
@@ -65,7 +73,7 @@
 						<td> <a class="div__pizzas__update button__link" href="updatePizza?id=<%= pizza.getId() %>">Atualizar</a> </td>
 						<td> <a class="div__pizzas__delete button__link" href="javascript: confirmarExclusao(<%= pizza.getId() %>)">Excluir</a> </td>
 					</tr>
-				<% } %>
+				<% } %>-->
 			</tbody>
 		</table>
 
@@ -73,5 +81,6 @@
 	</div>
 
 	<script src="scripts/confirmador.js"></script>
+	<script src="scripts/filtrarTipoPedido.js"></script>
 </body>
 </html>

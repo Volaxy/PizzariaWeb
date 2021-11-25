@@ -13,7 +13,7 @@ public class Program {
 	public static void main(String[] args) {
 		
 		// Métodos para Pizza CRUD
-//		Pizza pizza = new Pizza(null, "Americana", TamanhoDaPizza.GRANDE, 20.00);
+//		Pizza pizza = new Pizza(null, "Americana", TamanhoPizza.GRANDE, 20.00);
 //		pizzaDAO.insert(pizza);
 		
 //		List<Pizza> pizzas = pizzaDAO.findAll();
@@ -23,7 +23,7 @@ public class Program {
 		
 //		System.out.println(pizzaDAO.findById(2));
 		
-//		Pizza pizza = new Pizza(null, "Mista", TamanhoDaPizza.MEDIA, 90.00);
+//		Pizza pizza = new Pizza(null, "Mista", TamanhoPizza.MEDIA, 90.00);
 //		pizzaDAO.updatePizza(1, pizza);
 		
 //		pizzaDAO.deletePizza(1);

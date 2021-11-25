@@ -1,25 +1,41 @@
 /* Formatações de Classes */
 /* Formatações Gerais de Elementos */
 /* Formatações Top to Bottom */
-.tablePedidos {
+.div__pedidos {
     width: 400px;
 
     margin: 30vh auto;
-    border-collapse: collapse;
 
     text-align: center;
 }
 
-    .tablePedidos caption {
-        font-size: 3em;
-        font-weight: bolder;
+    .tablePedidos {
+        width: 100%;
 
-        text-decoration: underline;
+        border-collapse: collapse;
     }
 
-    .tablePedidos thead {
-        font-size: 1.25em;
-    }
+        .tablePedidos caption {
+            font-size: 3em;
+            font-weight: bolder;
+
+            text-decoration: underline;
+        }
+
+        .tablePedidos thead {
+            font-size: 1.25em;
+        }
+
+        .div__pedidos__add {
+            background-color: #12d400;
+            display: inline-block;
+
+            margin: 20px 25px 0;
+        }
+
+        .div__pedidos__presencial, .div__pedidos__entrega {
+            background-color: #41c6ee;
+        }
 
 .div__pizzas {
     position: absolute;
@@ -38,7 +54,7 @@
             font-weight: bolder;
         }
 
-        .tablePizzas tbody td {
+        .tablePizzas tbody tr {
             font-weight: normal;
         }
 

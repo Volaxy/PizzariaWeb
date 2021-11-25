@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.etaure.daos.PizzaDAO;
+import br.com.etaure.entities.Pedido;
 import br.com.etaure.entities.Pizza;
 import br.com.etaure.entities.enums.TamanhoPizza;
 
@@ -18,7 +19,7 @@ import br.com.etaure.entities.enums.TamanhoPizza;
  * Servlet implementation class MainController
  */
 @WebServlet(urlPatterns = { "/MainController", "/main", "/addPizza", "/updatePizza", "/updateOldPizza",
-		"/deletePizza" })
+		"/deletePizza", "/filtrarPresencial", "/filtrarEntrega"})
 public class MainController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -57,6 +58,12 @@ public class MainController extends HttpServlet {
 			break;
 		case "/deletePizza":
 			deletePizza(request, response);
+			break;
+		case "/filtrarPresencial":
+			filtrarPresencial(request, response);
+			break;
+		case "/filtrarEntrega":
+			filtrarEntrega(request, response);
 			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + action);
@@ -118,6 +125,14 @@ public class MainController extends HttpServlet {
 		pizzaDAO.deletePizza(id);
 		
 		response.sendRedirect("main");
+	}
+	
+	private void filtrarEntrega(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
+	private void filtrarPresencial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 
 }
