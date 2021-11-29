@@ -1,9 +1,7 @@
 /* Formatações de Classes */
 /* Formatações Gerais de Elementos */
 body {
-    background-image: linear-gradient(darkorange, goldenrod);
-
-    background-size: 100vh auto;
+    background-color: darkorange;
 }
 
 /* Formatações Top to Bottom */

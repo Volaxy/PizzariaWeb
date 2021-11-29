@@ -34,6 +34,6 @@
         <input class="updatePizza" type="button" value="Atualizar" onclick="validar()">
     </form>
 
-    <script src="scripts/validador.js"></script>
+    <script src="scripts/validadorPizza.js"></script>
 </body>
 </html>

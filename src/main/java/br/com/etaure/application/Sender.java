@@ -11,15 +11,13 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class MessageSender {
-	
-	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+public class Sender {
 
-	private static String queueName = "pedidos";
+	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+	
+	private static String queue = "pedidos";
 	
 	public static void main(String[] args) throws JMSException {
-		
-		System.out.println("url = " + url);
 		
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 		Connection connection = connectionFactory.createConnection();
@@ -27,14 +25,15 @@ public class MessageSender {
 		
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 		
-		Destination destination = session.createQueue(queueName);
+		Destination destination = session.createQueue(queue);
 		
 		MessageProducer producer = session.createProducer(destination);
-		TextMessage message = session.createTextMessage("Hello World!");
+		
+		TextMessage message = session.createTextMessage("Hello, World!");
 		
 		producer.send(message);
 		
-		System.out.println("Message '" + message.getText() + ", Sent Successfully to the Queue");
+		System.out.println("Message: " + message.getText());
 		connection.close();
 		
 	}

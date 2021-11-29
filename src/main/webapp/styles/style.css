@@ -13,8 +13,7 @@
 
 /* Formatações Gerais de Elementos */
 body {
-    background-image: linear-gradient(darkorange, goldenrod);
-    background-size: auto 100vh;
+    background-color: darkorange;
     
     margin: 0;
 

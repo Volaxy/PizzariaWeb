@@ -59,6 +59,7 @@ List<PedidoComNomeClienteDTO> pedidos = (ArrayList<PedidoComNomeClienteDTO>) req
 				class="div__pedidos__add button__link" href="newPedido.jsp">Registrar Pedido</a>
 			<a class="div__pedidos__entrega button__link"
 				href="javascript: entrega()">Entrega</a>
+			<a class="div__pedidos__verNovosPedidos button__Link" href="newRequests">Ver novos pedidos</a>
 		</div>
 	</div>
 

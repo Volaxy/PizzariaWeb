@@ -8,6 +8,8 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -35,14 +37,14 @@ import br.com.etaure.entities.enums.TipoPedido;
  * Servlet implementation class MainController
  */
 @WebServlet(urlPatterns = { "/MainController", "/main", "/addPizza", "/updatePizzaPage", "/updateOldPizza",
-		"/deletePizza", "/filtrarPresencial", "/filtrarEntrega", "/addPedido" })
+		"/deletePizza", "/filtrarPresencial", "/filtrarEntrega", "/addPedido", "/newRequests" })
 public class MainController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
 
-	private static String queueName = "pedidos";
+	private static String queue = "pedidos";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -87,6 +89,13 @@ public class MainController extends HttpServlet {
 			try {
 				addPedido(request, response);
 			} catch (ServletException | IOException | JMSException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "/newRequests":
+			try {
+				newRequests(request, response);
+			} catch (JMSException e) {
 				e.printStackTrace();
 			}
 			break;
@@ -206,23 +215,21 @@ public class MainController extends HttpServlet {
 				ClienteDAO.findById(Integer.parseInt(request.getParameter("idCliente"))));
 
 		PedidoDAO.insert(pedido);
-		
-		System.out.println("url = " + url);
-		
-		// ********* Serviço de Mensageria ********* //
+
+		/* Código de Mensageria */
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 		Connection connection = connectionFactory.createConnection();
 		connection.start();
-		
+
 		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		
-		Destination destination = session.createQueue(queueName);
-		
+
+		Destination destination = session.createQueue(queue);
+
 		MessageProducer producer = session.createProducer(destination);
-		
+
 		// Cria uma mensagem editada e formatada contendo os dados do pedido;
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("O pedido com o seguinte id: " + pedido.getId() + " foi registrado!");
 		sb.append("\nTipo de Entrega: " + pedido.getTipoPedido());
 		sb.append("\nTipo de Pagamento: " + pedido.getTipoPagamento());
@@ -236,17 +243,39 @@ public class MainController extends HttpServlet {
 		sb.append("\n\t\tRua: " + pedido.getCliente().getEndereco().getRua());
 		sb.append("\n\t\tNúmero: " + pedido.getCliente().getEndereco().getNumero());
 		sb.append("\n\t\tLogradouro: " + pedido.getCliente().getEndereco().getLogradouro());
-				
-		
+
 		TextMessage message = session.createTextMessage(sb.toString());
-		
+
 		producer.send(message);
-		
-		System.out.println("Message '" + message.getText() + ", Sent Successfully to the Queue");
+
+		System.out.println("Message: " + message.getText());
 		connection.close();
-		// ***************************************** //
-		
+
 		response.sendRedirect("main");
+	}
+
+	private void newRequests(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, JMSException {
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
+		Connection connection = connectionFactory.createConnection();
+		connection.start();
+
+		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+		Destination destination = session.createQueue(queue);
+
+		MessageConsumer consumer = session.createConsumer(destination);
+		
+		Message message = consumer.receive();
+		TextMessage textMessage = (TextMessage) message;
+
+		System.out.println("Received message '" + textMessage.getText() + "'");
+
+		connection.close();
+		
+		request.setAttribute("pedido", textMessage.getText());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("newRequests.jsp");
+		rd.forward(request, response);
 	}
 
 }
