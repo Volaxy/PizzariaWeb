@@ -37,11 +37,11 @@ import br.com.etaure.entities.enums.TipoPedido;
  * Servlet implementation class MainController
  */
 @WebServlet(urlPatterns = { "/MainController", "/main", "/addPizza", "/updatePizzaPage", "/updateOldPizza",
-		"/deletePizza", "/filtrarPresencial", "/filtrarEntrega", "/addPedido", "/newRequests" })
+"/deletePizza", "/filtrarPresencial", "/filtrarEntrega", "/addPedido", "/newRequests" })
 public class MainController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
 
 	private static String queue = "pedidos";
@@ -108,7 +108,7 @@ public class MainController extends HttpServlet {
 			throws ServletException, IOException {
 		List<Pizza> pizzas = PizzaDAO.findAll();
 
-		// Define uma variável contendo a lista de pizzas e direciona essa variável ao
+		// Define uma variï¿½vel contendo a lista de pizzas e direciona essa variï¿½vel ao
 		// documento "pizzas.jsp"
 		request.setAttribute("pizzas", pizzas);
 
@@ -216,7 +216,7 @@ public class MainController extends HttpServlet {
 
 		PedidoDAO.insert(pedido);
 
-		/* Código de Mensageria */
+		/* Cï¿½digo de Mensageria */
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
 		Connection connection = connectionFactory.createConnection();
 		connection.start();
@@ -227,9 +227,13 @@ public class MainController extends HttpServlet {
 
 		MessageProducer producer = session.createProducer(destination);
 
+		PedidoDAO.insert(pedido);
+		
+		System.out.println("url = " + url);
+		
 		// Cria uma mensagem editada e formatada contendo os dados do pedido;
 		StringBuilder sb = new StringBuilder();
-
+	
 		sb.append("O pedido com o seguinte id: " + pedido.getId() + " foi registrado!");
 		sb.append("\nTipo de Entrega: " + pedido.getTipoPedido());
 		sb.append("\nTipo de Pagamento: " + pedido.getTipoPagamento());
@@ -237,20 +241,21 @@ public class MainController extends HttpServlet {
 		sb.append("\nDados do Cliente:");
 		sb.append("\n\tNome: " + pedido.getCliente().getNome());
 		sb.append("\n\tCpf: " + pedido.getCliente().getCpf());
-		sb.append("\n\tEndereço do Cliente:");
+		sb.append("\n\tEndereco do Cliente:");
 		sb.append("\n\t\tCidade: " + pedido.getCliente().getEndereco().getCidade());
 		sb.append("\n\t\tBairro: " + pedido.getCliente().getEndereco().getBairro());
 		sb.append("\n\t\tRua: " + pedido.getCliente().getEndereco().getRua());
-		sb.append("\n\t\tNúmero: " + pedido.getCliente().getEndereco().getNumero());
+		sb.append("\n\t\tNumero: " + pedido.getCliente().getEndereco().getNumero());
 		sb.append("\n\t\tLogradouro: " + pedido.getCliente().getEndereco().getLogradouro());
-
+		
 		TextMessage message = session.createTextMessage(sb.toString());
 
 		producer.send(message);
 
 		System.out.println("Message: " + message.getText());
 		connection.close();
-
+		// ***************************************** //
+		
 		response.sendRedirect("main");
 	}
 
