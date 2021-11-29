@@ -1,6 +1,7 @@
 /* Formatações de Classes */
 /* Formatações Gerais de Elementos */
 /* Formatações Top to Bottom */
+/*
 .div__pedidos {
     width: 400px;
 
@@ -94,3 +95,82 @@
 
             transform: translateX(-50%);
         }
+*/
+
+.pedidos {
+    position: relative;
+}
+
+    .tablePedidos {
+        width: 500px;
+
+        margin: 20vh auto;
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.692);
+
+        border-collapse: collapse;
+
+        text-align: center;
+    }
+
+        .tablePedidos caption {
+            font-size: 2em;
+            font-weight: 800;
+        }
+
+        .tablePedidos thead {
+            background-color: #969696;
+        }
+
+        .tablePedidos tbody td {
+            padding: 10px;
+        }
+
+        .tablePedidos tbody tr:nth-child(even) {
+            background-color: #ddd;
+        }
+
+        .tablePedidos tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+                /* Formata a exibição do tipo de Entrega e Pagamento */
+                .tablePedidos tbody tr td:nth-child(2), .tablePedidos tbody tr td:nth-child(3) {
+                    text-transform: lowercase;
+                }
+
+                    .tablePedidos tbody tr td:nth-child(2)::first-letter, .tablePedidos tbody tr td:nth-child(3)::first-letter {
+                        text-transform: capitalize;
+                    }
+
+                /* Formata as bordas da última linha */
+                .tablePedidos tbody tr:last-child td:first-child {
+                    border-bottom-left-radius: 5px;
+                }
+
+                .tablePedidos tbody tr:last-child td:last-child {
+                    border-bottom-right-radius: 5px;
+                }
+
+    .buttonsPedidos {
+        position: absolute;
+        top: 11.5%;
+        left: 19.5%;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+        .buttonsPedidos a {
+            display: inline-block;
+
+            margin-bottom: 10px;
+        }
+
+            .div__pedidos__filter {
+                background-color: #a62cb1;
+            }
+
+            .div_pedidos__add {
+                background-color: #36da36;
+            }
