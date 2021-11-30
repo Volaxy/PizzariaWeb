@@ -1,102 +1,17 @@
 /* Formatações de Classes */
 /* Formatações Gerais de Elementos */
 /* Formatações Top to Bottom */
-/*
-.div__pedidos {
-    width: 400px;
+:root {
+    --headTables: #969696;
+    --zebraOdd: #fff;
+    --zebraEven: #ddd;
 
-    margin: 30vh auto;
-
-    text-align: center;
+    --buttonFilters: #a62cb1;
+    --buttonAdd: #36da36;
+    --buttonCRUD: yellow;
 }
 
-    .tablePedidos {
-        width: 100%;
-
-        border-collapse: collapse;
-    }
-
-        .tablePedidos caption {
-            font-size: 3em;
-            font-weight: bolder;
-
-            text-decoration: underline;
-        }
-
-        .tablePedidos thead {
-            font-size: 1.25em;
-        }
-
-        .div__pedidos__add {
-            background-color: #12d400;
-            display: inline-block;
-
-            margin: 20px 25px 0;
-        }
-
-        .div__pedidos__presencial, .div__pedidos__entrega {
-            background-color: #41c6ee;
-        }
-
-        .div__pedidos__verNovosPedidos {
-            background-color: gold;
-            display: inline-block;
-
-            margin-top: 20px;
-            margin-left: 5%;
-            border-radius: 5px;
-            padding: 15px;
-
-            color: black;
-            text-decoration: none;
-        }
-
-.div__pizzas {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-
-    .tablePizzas {
-        width: 400px;
-
-        text-align: center;
-    }
-
-        .tablePizzas caption {
-            font-size: 1.75em;
-            font-weight: bolder;
-        }
-
-        .tablePizzas tbody tr {
-            font-weight: normal;
-        }
-
-            .div__pizzas__update {
-                background-color: #41c6ee;
-                margin-left: 15px;
-
-                font-size: 0.8em;
-            }
-
-            .div__pizzas__delete {
-                background-color: crimson;
-
-                font-size: 0.8em;
-            }
-
-        .div__pizzas__add {
-            background-color: #12d400;
-            display: inline-block;
-
-            margin-top: 20px;
-            margin-left: 50%;
-            padding: 10px;
-
-            transform: translateX(-50%);
-        }
-*/
-
+/* Tabela de Pedidos */
 .pedidos {
     position: relative;
 }
@@ -118,20 +33,26 @@
             font-weight: 800;
         }
 
+        /* Cabeçalho da Tabela Pedidos */
         .tablePedidos thead {
-            background-color: #969696;
+            background-color: var(--headTables);
         }
 
+            .tablePedidos thead th {
+                padding: 12px;
+            }
+
+        /* Corpo da Tabela Pedidos */
         .tablePedidos tbody td {
             padding: 10px;
         }
 
         .tablePedidos tbody tr:nth-child(even) {
-            background-color: #ddd;
+            background-color: var(--zebraEven);
         }
 
         .tablePedidos tbody tr:nth-child(odd) {
-            background-color: #fff;
+            background-color: var(--zebraOdd);
         }
 
                 /* Formata a exibição do tipo de Entrega e Pagamento */
@@ -152,9 +73,10 @@
                     border-bottom-right-radius: 5px;
                 }
 
+    /* Bloco dos Botões da Tabela de Pedidos */
     .buttonsPedidos {
         position: absolute;
-        top: 11.5%;
+        top: 19%;
         left: 19.5%;
 
         display: flex;
@@ -167,10 +89,98 @@
             margin-bottom: 10px;
         }
 
-            .div__pedidos__filter {
-                background-color: #a62cb1;
+            .divPedidos__filter {
+                background-color: var(--buttonFilters);
             }
 
-            .div_pedidos__add {
-                background-color: #36da36;
+            .divPedidos__add {
+                background-color: var(--buttonAdd);
             }
+
+            .divPedidos__viewNewRequests {
+                background-color: var(--buttonFilters);
+
+                position: absolute;
+                top: 19%;
+                right: 19.5%;
+            }
+
+/* Tabela de Pizzas */
+.tablePizzas {
+    width: 350px;
+
+    margin-top: -100px;
+    margin-left: 5vw;
+    border-radius: 5px;
+
+    border-collapse: collapse;
+
+    text-align: center;
+}
+
+    .tablePizzas caption {
+        font-size: 1.5em;
+        font-weight: bolder;
+    }
+
+    /* Cabeçalho da Tabela Pizzas */
+    .tablePizzas thead {
+        background-color: var(--headTables);
+
+        border-top-left-radius: 4px;
+    }
+
+        .tablePizzas thead th {
+            padding: 12px;
+        }
+
+            .tablePizzas thead th:first-child {
+                border-top-left-radius: 5px;
+            }
+
+            .tablePizzas thead th:last-child {
+                border-top-right-radius: 5px;
+            }
+
+    /* Corpo da Tabela Pizzas */
+    .tablePizzas tbody tr:nth-child(odd) {
+        background-color: var(--zebraOdd);
+    }
+
+    .tablePizzas tbody tr:nth-child(even) {
+        background-color: var(--zebraEven);
+    }
+
+        .tablePizzas tbody .pizzasUpdate, .tablePizzas tbody .pizzasDelete {
+            background-color: var(--buttonCRUD);
+        }
+
+        .tablePizzas tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 5px;
+        }
+
+        .tablePizzas tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 5px;
+        }
+
+        .tablePizzas tbody tr td:nth-child(3) {
+            text-transform: lowercase;
+        }
+
+            .tablePizzas tbody tr td:nth-child(3)::first-letter {
+                text-transform: uppercase;
+            }
+
+
+    .tablePizzas tbody tr td {
+        padding: 15px 10px;
+    }
+
+    .pizzasAdd {
+        background-color: var(--buttonAdd);
+        display: inline-block;
+
+        margin-top: 20px;
+        margin-bottom: 50px;
+        margin-left: 12vw;
+    }
